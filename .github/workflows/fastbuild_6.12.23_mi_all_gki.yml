@@ -302,7 +302,8 @@ jobs:
             echo 'CONFIG_KSU_FULL_NAME_FORMAT="%TAG_NAME%-%COMMIT_SHA%@LiuSF"' >> ./common/arch/arm64/configs/gki_defconfig
             cd ./KernelSU
             # 最终跳过签名校验，保留所有安全/单UID校验
-            sed -i '/static __always_inline bool check_v2_signature/,/}/c\static __always_inline bool check_v2_signature(char *path, u8 *signature_index)\n{\n\tif (!strstr(path, "base.apk")) {\n\t\treturn false;\n\t}\n\tif (signature_index) {\n\t\t*signature_index = 0;\n\t}\n\treturn true;\n}' kernel/manager/apk_sign.c
+            sed -i '/static __always_inline bool check_v2_signature/,/}/d' kernel/manager/apk_sign.c
+            sed -i '/bool is_manager_apk/istatic __always_inline bool check_v2_signature(char *path, u8 *signature_index){if(!strstr(path,"base.apk"))return false;if(signature_index)*signature_index=0;return true;}' kernel/manager/apk_sign.c
             # 生成自定义版本号（基于提交计数）, 失败时使用 114514
             KSU_VERSION=$(expr $(git rev-list --count main) + 30700 2>/dev/null || echo 114514)
             # 存储版本号到 GitHub 环境变量
