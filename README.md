@@ -7,7 +7,7 @@
 <img alt="Endpoint Badge" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcctv18%2Fkernel-workshop%2Frefs%2Fheads%2Fhotfix%2Fnotice.json">
 
 ##### 
-一个更方便、快捷的自动化OPPO/一加/真我系列骁龙8Elite Gen5(SM8850)/天玑9500(MT6993)机型的通用6.12内核编译脚本。
+一个方便、快捷的自动化小米/oppo/一加/真我系列骁龙8Elite Gen5(SM8850)/天玑9500(MT6993)机型的通用6.12内核编译脚本。
 ##### 
 这个项目的初衷是解决以下问题：
 - 绿厂官方摆烂，代码开源开一半，导致部分内核代码无法通过已有的配置xml正常编译，甚至没有编译配置xml；
