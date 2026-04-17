@@ -1,4 +1,4 @@
-name: (小米17系列/通用main_all) 6.12.23 GKI内核快速构建
+name: (小米17系列/通用my_main) 6.12.23 GKI内核快速构建
 
 env:
   TZ: Asia/Shanghai
