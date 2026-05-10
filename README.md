@@ -21,21 +21,22 @@
 - [x] 欧加真骁龙 SM8850 通用OKI内核（基于一加15源码的 6.12.23 / 一加Ace 6T源码的 6.12.38 ，其他同内核版本非SM8850机型可自行测试，部分机型可完全兼容）
 - [x] 欧加真天玑 MT6993 通用OKI内核（基于OPPO Find X9 源码的 6.12.23 ，其他同内核版本非MT6993机型可自行测试，部分机型可完全兼容）
 - [x] ReSukiSU/SukiSU Ultra/KernelSU Next/原版KernelSU多版本KSU可选
-- [x] 引入ccache缓存及大量独家编译流程优化，首次编译时间约10min，二次编译时间可稳定在约4min *(首次编译时会拉取公共预置ccache，从第二次开始配置不变的情况下，单次编译时间约4min(由于ccache缓存机制，更改任意内核编译选项会使二次编译速度下降至约10分钟，若使用创建缓存时相同的配置可恢复至约4分钟，如需要长期修改配置选项建议开启“更新ccache缓存”选项)；距离上一次调用两周未调用后缓存会被自动清除，此时编译会自动重建缓存)*
+- [x] 引入独家设计的 [ccache-ECS](https://github.com/cctv18/ccache-ECS) 缓存及大量编译流程优化，编译时间可稳定在约6min *(首次编译时会拉取公共预置ccache，从第二次开始没有大量配置改动的情况下，单次编译时间约6min；距离上一次调用两周未调用后缓存会被自动清除，此时编译会自动重建缓存)*
 - [x] 引入O2编译优化，改善内核运行性能
 - [x] lz4 1.10.0 & zstd 1.5.7 算法更新&优化补丁(来自[@ferstar](https://github.com/ferstar), 移植by [@Xiaomichael](https://github.com/Xiaomichael), 6.12版本补丁重制by [@cctv18](https://github.com/cctv18))
 - [x] 移植lz4kd支持到6.12内核(可选补丁)
 - [x] 可选加入 BBR/Brutal 及一系列 tcp 拥塞控制算法
 - [x] [ADIOS IO调度器](https://github.com/firelzrd/adios)移植
 - [x] 加入一些网络连接性能优化配置选项（用于为ipset及需要iptables等高级网络功能内核支持的程序提供支持）
+- [x] Droidspaces 容器化支持（比传统 Docker/LXC 更轻量化，便于移植的完整 Linux 环境容器实现）
 - [x] 添加了对[Mountify](https://github.com/backslashxx/mountify)模块的支持
 - [x] 加入Re:Kernel支持，与Freezer，NoActive等软件配合降低功耗
 - [x] 加入[内核防格基带保护(By @showdo)](https://github.com/vc-teahouse/Baseband-guard)，有效防止恶意格机脚本/程序对系统分区数据的破坏
 ## 待实现：
 - [ ] zram内置化，无需外置zram.ko挂载 ~~（有了新版 lz4&zstd 补丁真的还有必要吗）~~
-- [ ] LXC/Docker 功能支持
-- [ ] Nethunter 驱动移植
-- ~~整合多版本内核编译脚本（🕊️🕊️🕊️）~~
+- [ ] Nethunter 网卡监听模式支持
+- [ ] kexec 内核热切换支持
+- 更多优化与特性移植……
 - 更多优化与特性移植……
 ##### 
 ##### 
