@@ -314,11 +314,11 @@ jobs:
             # 验证修改结果
             grep -A10 "REPO_OWNER" kernel/Makefile  # 检查插入点后的内容
             grep "KSU_VERSION_FULL" kernel/Makefile # 确认版本定义存在
-            echo "SukiSU版本号: v${KSU_API_VERSION}-${GIT_COMMIT_HASH}@LiuSF"
+            echo "SukiSU版本号: v${KSU_API_VERSION}-${GIT_COMMIT_HASH}@RainKissM"
           elif [[ ${{ github.event.inputs.ksu_type }} == "resukisu" ]]; then
             echo "正在配置ReSukiSU..."
-            curl -LSs "https://raw.githubusercontent.com/lsfqxd2006/ReSukiSU/refs/heads/dev/kernel/setup.sh" | bash -s dev
-            echo 'CONFIG_KSU_FULL_NAME_FORMAT="%TAG_NAME%-%COMMIT_SHA%@LiuSF"' >> ./common/arch/arm64/configs/gki_defconfig
+            curl -LSs "https://raw.githubusercontent.com/lsfqxd2006/ReSukiSU/refs/heads/mycopy/kernel/setup.sh" | bash -s mycopy
+            echo 'CONFIG_KSU_FULL_NAME_FORMAT="%TAG_NAME%-%COMMIT_SHA%@RainKissM"' >> ./common/arch/arm64/configs/gki_defconfig
             cd ./KernelSU
             # 生成自定义版本号（基于提交计数）, 失败时使用 114514
             KSU_VERSION=$(expr $(git fetch --quiet https://github.com/ReSukiSU/ReSukiSU.git dev && git rev-list --count FETCH_HEAD) + 30700 2>/dev/null || echo 114514)
@@ -923,7 +923,7 @@ jobs:
           - ADIOS IO调度器支持：${{ github.event.inputs.adios_enable }}
           - Re-Kernel支持：${{ github.event.inputs.rekernel_enable }}
           - 内核级基带保护支持：${{ github.event.inputs.baseband_guard }}
-          - ReSukiSU管理器下载：[ReSukiSU_CI](https://github.com/cctv18/ReSukiSU_CI/releases)
+          - ReSukiSU管理器下载：[ReSukiSU](https://github.com/lsfqxd2006/ReSukiSU/releases)
           - SukiSU Ultra管理器下载：[SukiSU-Ultra](https://github.com/SukiSU-Ultra/SukiSU-Ultra/releases)
           - KernelSU Next管理器下载：[KernelSU-Next](https://github.com/KernelSU-Next/KernelSU-Next/releases)
           - KSU原版管理器下载：[KernelSU](https://github.com/tiann/KernelSU/releases)
