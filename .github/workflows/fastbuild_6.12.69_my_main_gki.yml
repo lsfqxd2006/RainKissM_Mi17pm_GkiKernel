@@ -1,12 +1,12 @@
-name: (小米17系列/通用my_main) 6.12.23 GKI内核快速构建
+name: (小米17系列/通用my_main) 6.12.69 GKI内核快速构建
 
 env:
   TZ: Asia/Shanghai
   ANDROID_VERSION: 'android16'
   KERNEL_VERSION: '6.12'
-  SUB_VERSION: '23_gki'
-  KERNEL_NAME: 'android16-5-ga8f88ad96df3-ab13929693-4k'
-  CCACHE_KEY: ccache-ecsv4-gki-6.12.23
+  SUB_VERSION: '69_gki'
+  KERNEL_NAME: 'android16-6-g586bfab1b9c5-abogki537510563-4k'
+  CCACHE_KEY: ccache-ecsv4-gki-6.12.69
 
 on:
   workflow_dispatch:
@@ -130,9 +130,9 @@ jobs:
           rm -f ./ccache &
           
           echo "正在克隆源码仓库..."
-          aria2c -s16 -x16 -k1M https://github.com/cctv18/android_gki_kernel_common/archive/refs/heads/android16-6.12-2025-06.zip -o common.zip && 
+          aria2c -s16 -x16 -k1M https://github.com/cctv18/android_gki_kernel_common/archive/refs/heads/android16-6.12-2026-03.zip -o common.zip && 
           unzip -q common.zip && 
-          mv "android_gki_kernel_common-android16-6.12-2025-06" common &&
+          mv "android_gki_kernel_common-android16-6.12-2026-03" common &&
           rm -rf common.zip &
           
           echo "正在克隆llvm-clang19工具链..." &&
@@ -386,10 +386,10 @@ jobs:
           # 6.12内核Rust配置
           echo "CONFIG_RUST=y" >> ./common/arch/arm64/configs/gki_defconfig
           echo "CONFIG_ANDROID_BINDER_IPC_RUST=m" >> ./common/arch/arm64/configs/gki_defconfig
-          # 应用 CVE_2026_43499 修复补丁
-          cd common
-          wget https://github.com/$GITHUB_REPOSITORY/raw/refs/heads/$GITHUB_REF_NAME/other_patch/cve-2026-43499-rtmutex-6.12.patch
-          patch -p1 -F 3 < cve-2026-43499-rtmutex-6.12.patch
+          # 应用 CVE_2026_43499 修复补丁（新版内核源码已应用补丁，无需再应用）
+          # cd common
+          # wget https://github.com/$GITHUB_REPOSITORY/raw/refs/heads/$GITHUB_REF_NAME/other_patch/cve-2026-43499-rtmutex-6.12.patch
+          # patch -p1 -F 3 < cve-2026-43499-rtmutex-6.12.patch
           
       - name: 启用网络功能增强优化配置
         if: inputs.better_net
