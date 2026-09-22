@@ -303,7 +303,7 @@ jobs:
             cp ./susfs4ksu/kernel_patches/fs/* ./common/fs/
             cp ./susfs4ksu/kernel_patches/include/linux/* ./common/include/linux/
             cd ./common
-            patch -p1 < 50_add_susfs_in_gki-${{ env.ANDROID_VERSION }}-${{ env.KERNEL_VERSION }}.patch || true
+            patch -p1 -F 3 < 50_add_susfs_in_gki-${{ env.ANDROID_VERSION }}-${{ env.KERNEL_VERSION }}.patch || true
             cd ..
           else
             echo "已选择无内置KernelSU模式，跳过susfs配置..."
@@ -312,7 +312,7 @@ jobs:
             echo "正在为原版 KernelSU (tiann/KernelSU)添加补丁..."
             cp ./susfs4ksu/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch ./KernelSU/
             cd ./KernelSU
-            patch -p1 < 10_enable_susfs_for_ksu.patch || true
+            patch -p1 -F 3 < 10_enable_susfs_for_ksu.patch || true
           fi
           
       - name: 应用lz4 1.10.0 & zstd 1.5.7补丁
@@ -324,8 +324,8 @@ jobs:
           cp ./$GITHUB_ACTOR/zram_patch/001-lz4.patch ./common/
           cp ./$GITHUB_ACTOR/zram_patch/002-zstd.patch ./common/
           cd ./common
-          patch -p1 < 001-lz4.patch || true
-          patch -p1 < 002-zstd.patch || true
+          patch -p1 -F 3 < 001-lz4.patch || true
+          patch -p1 -F 3 < 002-zstd.patch || true
 
       - name: 应用 lz4kd 补丁
         if: inputs.lz4kd_enable
